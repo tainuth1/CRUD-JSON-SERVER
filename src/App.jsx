@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Row from "./components/Row";
 
 const App = () => {
+  const [products, setProduct] = useState([]);
   const [productData, setProductData] = useState({
     id: Date.now(),
     name: "",
     price: 0,
     image: "",
   });
+
+  const fetchProduct = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/product");
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await res.json();
+      setProduct(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    fetchProduct();
+  }, [products]);
 
   const handleChange = (e) => {
     setProductData({ ...productData, [e.target.name]: e.target.value });
@@ -22,6 +40,8 @@ const App = () => {
       if (!res.ok) {
         throw new Error("Faild to add data");
       }
+      const data = await res.json();
+      setProduct({ ...products, data });
       setProductData({
         id: Date.now(),
         name: "",
@@ -106,7 +126,7 @@ const App = () => {
         </div>
       </div>
       <div className="">
-        <table className="table">
+        <table className="table" style={{ tableLayout: "fixed" }}>
           <thead>
             <tr>
               <th scope="col">#ID</th>
@@ -117,32 +137,13 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th
-                scope="row"
-                style={{ color: "#000", verticalAlign: "middle" }}
-              >
-                111111
-              </th>
-              <td style={{ verticalAlign: "middle" }}>Coca Cola</td>
-              <td style={{ verticalAlign: "middle" }}>$99.99</td>
-              <td style={{ verticalAlign: "middle" }}>
-                <img
-                  src="https://fdn.gsmarena.com/imgroot/reviews/22/apple-iphone-14/lifestyle/-1024w2/gsmarena_019.jpg"
-                  alt="Product"
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-              <td style={{ verticalAlign: "middle" }}>
-                <button className="btn btn-outline-primary">Update</button>
-                <button className="btn btn-danger ms-3">Delete</button>
-              </td>
-            </tr>
+            {products.length == 0 ? (
+              <tr>
+                <td className="text-center">Product Empty</td>
+              </tr>
+            ) : (
+              products.map((pro) => <Row key={pro.id} pro={pro} />)
+            )}
           </tbody>
         </table>
       </div>
