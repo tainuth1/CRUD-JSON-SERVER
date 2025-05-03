@@ -1,0 +1,16 @@
+{
+  "product": [
+    {
+      "id": 1746250832823,
+      "name": "Coca Cola",
+      "price": "5",
+      "image": "https://th.bing.com/th/id/OIP.amD-fqUHOeQ734dEz6--7wHaHa?rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": 1746250930121,
+      "name": "Sting",
+      "price": "5",
+      "image": "https://th.bing.com/th/id/OIP.IHoXE5Hjc0dk_lmZXoO0sAHaHa?rs=1&pid=ImgDetMain"
+    }
+  ]
+}
