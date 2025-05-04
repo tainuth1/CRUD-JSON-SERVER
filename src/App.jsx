@@ -4,7 +4,7 @@ import Row from "./components/Row";
 const App = () => {
   const [products, setProduct] = useState([]);
   const [productData, setProductData] = useState({
-    id: Date.now(),
+    id: `${Date.now()}`,
     name: "",
     price: 0,
     image: "",
@@ -32,22 +32,30 @@ const App = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/product", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(productData),
-      });
-      if (!res.ok) {
-        throw new Error("Faild to add data");
+      if (
+        productData.name != "" &&
+        productData.image != "" &&
+        productData.price != 0
+      ) {
+        const res = await fetch("http://localhost:3000/product", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(productData),
+        });
+        if (!res.ok) {
+          throw new Error("Faild to add data");
+        }
+        const data = await res.json();
+        setProduct([...products, data]);
+        setProductData({
+          id: `${Date.now()}`,
+          name: "",
+          price: 0,
+          image: "",
+        });
+      } else {
+        alert("Field is empty");
       }
-      const data = await res.json();
-      setProduct([...products, data]);
-      setProductData({
-        id: Date.now(),
-        name: "",
-        price: 0,
-        image: "",
-      });
     } catch (error) {
       console.log(error.message);
       alert(error.message);
