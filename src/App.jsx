@@ -41,7 +41,7 @@ const App = () => {
         throw new Error("Faild to add data");
       }
       const data = await res.json();
-      setProduct({ ...products, data });
+      setProduct([...products, data]);
       setProductData({
         id: Date.now(),
         name: "",
@@ -142,7 +142,14 @@ const App = () => {
                 <td className="text-center">Product Empty</td>
               </tr>
             ) : (
-              products.map((pro) => <Row key={pro.id} pro={pro} />)
+              products.map((pro) => (
+                <Row
+                  key={pro.id}
+                  pro={pro}
+                  products={products}
+                  setProduct={setProduct}
+                />
+              ))
             )}
           </tbody>
         </table>

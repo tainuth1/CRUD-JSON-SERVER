@@ -1,6 +1,21 @@
 import React from "react";
 
-const Row = ({ pro }) => {
+const Row = ({ pro, products, setProduct }) => {
+  const deleteProduct = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:3000/product/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        throw new Error("Failed to delete Product");
+      }
+      const produtsAfterDelete = products.filter((pro) => pro.id != id);
+      setProduct(produtsAfterDelete);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <tr>
       <th scope="row" style={{ color: "#000", verticalAlign: "middle" }}>
@@ -23,7 +38,12 @@ const Row = ({ pro }) => {
       </td>
       <td style={{ verticalAlign: "middle" }}>
         <button className="btn btn-outline-primary">Update</button>
-        <button className="btn btn-danger ms-3">Delete</button>
+        <button
+          className="btn btn-danger ms-3"
+          onClick={() => deleteProduct(pro.id)}
+        >
+          Delete
+        </button>
       </td>
     </tr>
   );

@@ -1,28 +1,10 @@
 {
   "product": [
     {
-      "id": 1746250832823,
-      "name": "Coca Cola",
-      "price": "5",
-      "image": "https://th.bing.com/th/id/OIP.amD-fqUHOeQ734dEz6--7wHaHa?rs=1&pid=ImgDetMain"
-    },
-    {
-      "id": 1746250930121,
+      "id": 1746333955167,
       "name": "Sting",
-      "price": "5",
-      "image": "https://th.bing.com/th/id/OIP.IHoXE5Hjc0dk_lmZXoO0sAHaHa?rs=1&pid=ImgDetMain"
-    },
-    {
-      "id": 1746253036873,
-      "name": "Vital",
-      "price": "0.75",
-      "image": "https://www.vital.com.kh/wp-content/uploads/2021/03/All-Botton-04.png"
-    },
-    {
-      "id": 1746253376639,
-      "name": "Samsung S24 Ultra",
-      "price": "44",
-      "image": "https://th.bing.com/th/id/OIP.IHoXE5Hjc0dk_lmZXoO0sAHaHa?rs=1&pid=ImgDetMain"
+      "price": "10",
+      "image": "https://th.bing.com/th/id/OIP.amD-fqUHOeQ734dEz6--7wHaHa?rs=1&pid=ImgDetMain"
     }
   ]
 }
